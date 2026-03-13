@@ -1,0 +1,26 @@
+{
+  "name": "bkm-music-library",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@chakra-ui/icons": "^2.2.4",
+    "@chakra-ui/react": "^2.10.9",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "framer-motion": "^11.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.3.0",
+    "react-router-dom": "^6.26.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.1"
+  }
+}
