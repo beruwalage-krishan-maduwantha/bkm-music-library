@@ -1,17 +1,15 @@
 import {
   Box, Button, Container, Flex, FormControl, FormLabel, Heading,
   HStack, IconButton, Image, Input, Modal, ModalBody, ModalCloseButton,
-  ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, SimpleGrid,
-  Tag, Text, useDisclosure, useToast, VStack, Badge,
+  ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, VStack,
+  Tag, Text, useDisclosure, useToast, Badge,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { DeleteIcon, EditIcon, AddIcon } from '@chakra-ui/icons';
-import { MdMusicNote } from 'react-icons/md';
 import { useAuth } from '../../context/AuthContext';
 import API_BASE from '../../config';
 
 const GENRES = ['Pop', 'Rock', 'Hip-Hop', 'Electronic', 'Jazz', 'Classical', 'R&B', 'Ambient', 'Other'];
-
 const EMPTY = { title: '', artist: 'BKM', genre: 'Other', audioUrl: '', coverUrl: '', duration: '' };
 
 const AdminDashboard = () => {
@@ -42,12 +40,7 @@ const AdminDashboard = () => {
 
   useEffect(() => { fetchSongs(); }, []);
 
-  const openAdd = () => {
-    setForm(EMPTY);
-    setEditingId(null);
-    onOpen();
-  };
-
+  const openAdd = () => { setForm(EMPTY); setEditingId(null); onOpen(); };
   const openEdit = (song) => {
     setForm({ title: song.title, artist: song.artist, genre: song.genre, audioUrl: song.audioUrl, coverUrl: song.coverUrl || '', duration: song.duration || '' });
     setEditingId(song._id);
@@ -61,7 +54,7 @@ const AdminDashboard = () => {
     }
     setSaving(true);
     try {
-      const url = editingId ? `/api/songs/${editingId}` : '/api/songs';
+      const url = editingId ? `${API_BASE}/api/songs/${editingId}` : `${API_BASE}/api/songs`;
       const method = editingId ? 'PUT' : 'POST';
       const res = await fetch(url, { method, headers: authHeaders, body: JSON.stringify(form) });
       const data = await res.json();
@@ -82,7 +75,7 @@ const AdminDashboard = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this song?')) return;
     try {
-      const res = await fetch(`/api/songs/${id}`, { method: 'DELETE', headers: authHeaders });
+      const res = await fetch(`${API_BASE}/api/songs/${id}`, { method: 'DELETE', headers: authHeaders });
       const data = await res.json();
       if (data.success) {
         toast({ title: 'Song deleted', status: 'info', duration: 2000, isClosable: true });
@@ -172,7 +165,6 @@ const AdminDashboard = () => {
         )}
       </Container>
 
-      {/* Add/Edit Modal */}
       <Modal isOpen={isOpen} onClose={onClose} size="md">
         <ModalOverlay backdropFilter="blur(10px)" bg="blackAlpha.700" />
         <ModalContent bg="gray.900" border="1px solid" borderColor="whiteAlpha.200" borderRadius="2xl">
@@ -204,7 +196,7 @@ const AdminDashboard = () => {
               <FormControl isRequired>
                 <FormLabel fontSize="sm" color="whiteAlpha.700">Audio URL</FormLabel>
                 <Input value={form.audioUrl} onChange={e => setForm({ ...form, audioUrl: e.target.value })}
-                  placeholder="https://... (Riffusion or direct MP3 link)"
+                  placeholder="https://storage.googleapis.com/... (.m4a or .mp3)"
                   bg="whiteAlpha.100" borderColor="whiteAlpha.200" _focus={{ borderColor: 'brand.500' }} />
               </FormControl>
               <FormControl>

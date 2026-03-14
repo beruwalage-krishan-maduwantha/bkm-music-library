@@ -48,7 +48,6 @@ const SongCard = ({ song, onPlay, isPlaying, sessionId }) => {
       role="group"
       position="relative"
     >
-      {/* Cover */}
       <Box position="relative" overflow="hidden">
         <Image
           src={song.coverUrl || coverFallback}
@@ -57,7 +56,6 @@ const SongCard = ({ song, onPlay, isPlaying, sessionId }) => {
           transition="transform 0.4s"
           _groupHover={{ transform: 'scale(1.05)' }}
         />
-        {/* Play overlay */}
         <Flex
           position="absolute" inset={0}
           bg="blackAlpha.500"
@@ -74,8 +72,6 @@ const SongCard = ({ song, onPlay, isPlaying, sessionId }) => {
             {isPlaying ? <MdPause size={28} color="white" /> : <MdPlayArrow size={28} color="white" />}
           </Box>
         </Flex>
-
-        {/* Genre tag */}
         <Tag
           position="absolute" top={2} left={2}
           size="sm" colorScheme={genreColors[song.genre] || 'gray'}
@@ -85,7 +81,6 @@ const SongCard = ({ song, onPlay, isPlaying, sessionId }) => {
         </Tag>
       </Box>
 
-      {/* Info */}
       <Box p={4}>
         <VStack align="start" spacing={1} mb={3}>
           <Text fontFamily="Syne, sans-serif" fontWeight="700" fontSize="md" noOfLines={1}>

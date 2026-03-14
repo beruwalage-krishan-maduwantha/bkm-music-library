@@ -2,14 +2,13 @@ import {
   Box, Button, Center, Container, Heading, HStack, Input,
   InputGroup, InputLeftElement, SimpleGrid, Spinner, Text, VStack, Wrap, WrapItem,
 } from '@chakra-ui/react';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SearchIcon } from '@chakra-ui/icons';
 import SongCard from '../../components/SongCard';
 import API_BASE from '../../config';
 
 const GENRES = ['All', 'Pop', 'Rock', 'Hip-Hop', 'Electronic', 'Jazz', 'Classical', 'R&B', 'Ambient', 'Other'];
 
-// Stable session ID per browser tab
 const SESSION_ID = Math.random().toString(36).slice(2);
 
 const HomePage = ({ playSong, currentSong }) => {
@@ -36,7 +35,6 @@ const HomePage = ({ playSong, currentSong }) => {
 
   useEffect(() => { fetchSongs(); }, [genre]);
 
-  // Debounce search
   useEffect(() => {
     const timer = setTimeout(() => fetchSongs(), 400);
     return () => clearTimeout(timer);
@@ -51,7 +49,6 @@ const HomePage = ({ playSong, currentSong }) => {
         position="relative"
         overflow="hidden"
       >
-        {/* Glow effect */}
         <Box position="absolute" top="50%" left="50%" transform="translate(-50%,-50%)"
           w="600px" h="300px" bg="brand.500" opacity={0.08} borderRadius="full" filter="blur(80px)" />
 
@@ -71,7 +68,6 @@ const HomePage = ({ playSong, currentSong }) => {
               AI-generated music curated for every mood. Hit play and explore.
             </Text>
 
-            {/* Search */}
             <InputGroup maxW="480px" w="full">
               <InputLeftElement pointerEvents="none">
                 <SearchIcon color="whiteAlpha.400" />
@@ -94,7 +90,6 @@ const HomePage = ({ playSong, currentSong }) => {
       </Box>
 
       <Container maxW="1200px" py={8}>
-        {/* Genre filters */}
         <Wrap spacing={2} mb={8} justify="center">
           {GENRES.map(g => (
             <WrapItem key={g}>
@@ -115,7 +110,6 @@ const HomePage = ({ playSong, currentSong }) => {
           ))}
         </Wrap>
 
-        {/* Songs grid */}
         {loading ? (
           <Center h="300px"><Spinner size="xl" color="brand.400" thickness="3px" /></Center>
         ) : songs.length === 0 ? (
