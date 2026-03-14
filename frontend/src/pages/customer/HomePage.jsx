@@ -5,6 +5,7 @@ import {
 import { useEffect, useMemo, useState } from 'react';
 import { SearchIcon } from '@chakra-ui/icons';
 import SongCard from '../../components/SongCard';
+import API_BASE from '../../config';
 
 const GENRES = ['All', 'Pop', 'Rock', 'Hip-Hop', 'Electronic', 'Jazz', 'Classical', 'R&B', 'Ambient', 'Other'];
 
@@ -23,7 +24,7 @@ const HomePage = ({ playSong, currentSong }) => {
       const params = new URLSearchParams();
       if (genre !== 'All') params.append('genre', genre);
       if (search) params.append('search', search);
-      const res = await fetch(`/api/songs?${params}`);
+      const res = await fetch(`${API_BASE}/api/songs?${params}`);
       const data = await res.json();
       if (data.success) setSongs(data.data);
     } catch (err) {

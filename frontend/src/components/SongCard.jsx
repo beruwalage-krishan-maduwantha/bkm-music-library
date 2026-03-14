@@ -3,6 +3,7 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { MdFavorite, MdFavoriteBorder, MdPlayArrow, MdPause } from 'react-icons/md';
+import API_BASE from '../config';
 
 const genreColors = {
   Pop: 'pink', Rock: 'red', 'Hip-Hop': 'orange', Electronic: 'cyan',
@@ -18,7 +19,7 @@ const SongCard = ({ song, onPlay, isPlaying, sessionId }) => {
   const handleLike = async (e) => {
     e.stopPropagation();
     try {
-      const res = await fetch(`/api/songs/${song._id}/like`, {
+      const res = await fetch(`${API_BASE}/api/songs/${song._id}/like`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sessionId }),

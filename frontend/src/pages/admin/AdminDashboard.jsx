@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { DeleteIcon, EditIcon, AddIcon } from '@chakra-ui/icons';
 import { MdMusicNote } from 'react-icons/md';
 import { useAuth } from '../../context/AuthContext';
+import API_BASE from '../../config';
 
 const GENRES = ['Pop', 'Rock', 'Hip-Hop', 'Electronic', 'Jazz', 'Classical', 'R&B', 'Ambient', 'Other'];
 
@@ -31,7 +32,7 @@ const AdminDashboard = () => {
   const fetchSongs = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/songs');
+      const res = await fetch(`${API_BASE}/api/songs`);
       const data = await res.json();
       if (data.success) setSongs(data.data);
     } finally {
