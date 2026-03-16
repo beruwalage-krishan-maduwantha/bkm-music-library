@@ -2,6 +2,7 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import MusicPlayer from './components/MusicPlayer';
+import Footer from './components/Footer';
 import { useState } from 'react';
 
 // Customer pages
@@ -52,6 +53,7 @@ function App() {
         } />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      <Footer />
       {currentSong && (
         <MusicPlayer
           song={currentSong}
