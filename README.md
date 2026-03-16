@@ -28,6 +28,11 @@ A full-stack music streaming web application built with the MERN stack. Features
 - Manage song details: title, artist, genre, audio URL, cover image, duration
 - Protected routes — only accessible with valid token
 
+### 🆕 Latest Updates
+- Footer added with BKM Music branding, quick links, and social links
+- Producer AI changed to Producer AI for music generation
+- API base URL config for seamless local and production switching
+
 ---
 
 ## 🛠️ Tech Stack
@@ -41,6 +46,7 @@ A full-stack music streaming web application built with the MERN stack. Features
 | Music Source | Producer AI (AI-generated music) |
 | Frontend Hosting | Vercel |
 | Backend Hosting | Railway |
+| Database Hosting | MongoDB Atlas |
 
 ---
 
@@ -57,7 +63,7 @@ bkm-music-library/
 │   └── server.js
 └── frontend/
     └── src/
-        ├── components/ # Navbar, MusicPlayer, SongCard
+        ├── components/ # Navbar, MusicPlayer, SongCard, Footer
         ├── context/    # Auth context (JWT)
         ├── config.js   # API base URL config
         └── pages/
@@ -127,6 +133,10 @@ npm run dev
 - Root Directory: `frontend`
 - Environment Variable: `VITE_API_URL=https://bkm-music-library-production.up.railway.app`
 
+### Keep Backend Alive
+- Using [cron-job.org](https://cron-job.org) to ping the backend every 15 minutes
+- Prevents Railway free tier cold starts
+
 ---
 
 ## 🔌 API Endpoints
@@ -140,6 +150,17 @@ npm run dev
 | POST | `/api/songs` | Admin | Add a song |
 | PUT | `/api/songs/:id` | Admin | Update a song |
 | DELETE | `/api/songs/:id` | Admin | Delete a song |
+
+---
+
+## 🎵 How to Add Music
+
+1. Go to [producer.ai](https://www.producer.ai) and generate a song
+2. Open the song page → Press **F12** → **Network** tab → **Media** filter
+3. Press play — copy the `.m4a` URL from the network request
+4. Copy the cover image URL from the **Img** tab
+5. Go to `https://bkm-music-library.vercel.app/admin/login`
+6. Login and click **Add Song** — paste the URLs
 
 ---
 
